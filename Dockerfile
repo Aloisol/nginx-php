@@ -3,7 +3,7 @@
 #
 
 FROM debian:bullseye-slim
-MAINTAINER Sébastien Santoro aka Dereckson <dereckson+nasqueron-docker@espace-win.org>
+MAINTAINER yomismo <yomismo@espace-win.org>
 
 #
 # Prepare the container
@@ -107,6 +107,7 @@ RUN groupadd -r app -g 433 && \
 	chown -R app:app /home/app /var/wwwroot/default && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default
+ 	echo "Hola Mundo"
 
 COPY files / 
 
