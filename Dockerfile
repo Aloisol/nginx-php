@@ -106,8 +106,10 @@ RUN groupadd -r app -g 433 && \
 	useradd -u 431 -r -g app -d /home/app -s /usr/sbin/nologin -c "Docker image user for web application" app && \
 	chown -R app:app /home/app /var/wwwroot/default && \
 	chmod 700 /home/app && \
-	chmod 711 /var/wwwroot/default
- 	echo "Hola Mundo"
+	chmod 711 /var/wwwroot/default &&\
+	echo "<h1>HOLA MUNDO</h1> </hr> <?php  phpinfo(); ?>" > /var/wwwroot/default/index.php
+
+
 
 COPY files / 
 
