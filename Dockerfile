@@ -1,5 +1,5 @@
 #
-# Nasqueron  - Base nginx / php-fpm image
+# EuroNGphp  - nginx / php-fpm
 #
 
 FROM debian:bullseye-slim
@@ -13,6 +13,8 @@ ENV PHP_VERSION 8.2.3
 ENV ONIGURAMA_VERSION=6.9.8
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=app --with-fpm-group=app
 ENV PHP_INI_DIR /usr/local/etc/php
+ENV REPO_URL=https://github.com/Aloisol/test-login
+ENV REPO_NAME=test-login
 ENV PHP_BUILD_DEPS bzip2 \
 		file \
 		g++ \
@@ -107,9 +109,11 @@ RUN groupadd -r app -g 433 && \
 	chown -R app:app /home/app /var/wwwroot/default && \
 	chmod 700 /home/app && \
 	chmod 711 /var/wwwroot/default &&\
-	echo "<h1>HOLA MUNDO</h1> </hr> <?php  phpinfo(); ?>" > /var/wwwroot/default/index.php
-
-
+	mv /var/wwwroot/default /var/wwwroot/default_old &&\
+	cd /var/wwwroot/ &&\
+	git clone $REPO_URL &&\
+	mv /var/wwwroot/$REPO_NAME /var/wwwroot/default &&\
+	echo "<h1>HOLA MUNDO 5</h1> </hr> <?php  phpinfo(); ?>" > /var/wwwroot/default/test.php
 
 COPY files / 
 
